@@ -26,3 +26,4 @@ typings/
 .env
 .DS_Store
 test.js
+.idea/
