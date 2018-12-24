@@ -86,9 +86,11 @@ function clearTableSchema(table){
   if(table.LocalSecondaryIndexes && table.LocalSecondaryIndexes.length > 0){
     for(var i = 0 ; i < table.LocalSecondaryIndexes.length ; i++){
         delete table.LocalSecondaryIndexes[i].IndexStatus
-        delete table.LocalSecondaryIndexes[i].ProvisionedThroughput.LastIncreaseDateTime
-        delete table.LocalSecondaryIndexes[i].ProvisionedThroughput.LastDecreaseDateTime
-        delete table.LocalSecondaryIndexes[i].ProvisionedThroughput.NumberOfDecreasesToday
+        if (table.LocalSecondaryIndexes[i].ProvisionedThroughput) {
+          delete table.LocalSecondaryIndexes[i].ProvisionedThroughput.LastIncreaseDateTime
+          delete table.LocalSecondaryIndexes[i].ProvisionedThroughput.LastDecreaseDateTime
+          delete table.LocalSecondaryIndexes[i].ProvisionedThroughput.NumberOfDecreasesToday
+        }
         delete table.LocalSecondaryIndexes[i].IndexSizeBytes
         delete table.LocalSecondaryIndexes[i].ItemCount
         delete table.LocalSecondaryIndexes[i].IndexArn
